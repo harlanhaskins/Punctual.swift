@@ -125,7 +125,7 @@ extension Int {
 
 extension NSDateComponents {
     public var ago: NSDate? {
-        return (-self).fromNow
+        return self.untilDate(NSDate())
     }
     
     public var fromNow: NSDate? {
