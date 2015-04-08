@@ -8,11 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C9D3095B1AD4CD9E0055D145 /* Punctual.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D3094F1AD4CD9E0055D145 /* Punctual.framework */; };
-		C9D309741AD4E4510055D145 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9D3096E1AD4E4510055D145 /* Info.plist */; };
-		C9D309751AD4E4510055D145 /* Punctual.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D3096F1AD4E4510055D145 /* Punctual.h */; };
+		C9D309751AD4E4510055D145 /* Punctual.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D3096F1AD4E4510055D145 /* Punctual.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9D309761AD4E4510055D145 /* Punctual.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D309701AD4E4510055D145 /* Punctual.swift */; };
-		C9D309771AD4E4510055D145 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9D309721AD4E4510055D145 /* Info.plist */; };
-		C9D309781AD4E4510055D145 /* PunctualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D309731AD4E4510055D145 /* PunctualTests.swift */; };
+		C9D3097B1AD4E6160055D145 /* PunctualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D309731AD4E4510055D145 /* PunctualTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,8 +195,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9D309771AD4E4510055D145 /* Info.plist in Resources */,
-				C9D309741AD4E4510055D145 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +213,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9D309761AD4E4510055D145 /* Punctual.swift in Sources */,
-				C9D309781AD4E4510055D145 /* PunctualTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9D3097B1AD4E6160055D145 /* PunctualTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +328,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Shiny/Info.plist;
+				INFOPLIST_FILE = Punctual/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -350,7 +346,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Shiny/Info.plist;
+				INFOPLIST_FILE = Punctual/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -370,7 +366,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ShinyTests/Info.plist;
+				INFOPLIST_FILE = PunctualTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = PunctualTests;
 			};
@@ -383,7 +379,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ShinyTests/Info.plist;
+				INFOPLIST_FILE = PunctualTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = PunctualTests;
 			};

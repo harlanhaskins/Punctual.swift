@@ -143,14 +143,14 @@ extension NSDateComponents {
 
 private func applyIfDefined(int: Int, otherInt: Int,  transform: (Int, Int) -> Int) -> Int{
     switch (int, otherInt) {
-    case (_, NSDateComponentUndefined): return int
-    case (NSDateComponentUndefined, _): return otherInt
+    case (_, Int(NSDateComponentUndefined)): return int
+    case (Int(NSDateComponentUndefined), _): return otherInt
     default: return transform(int, otherInt)
     }
 }
 
 private func applyIfDefined(int: Int, transform: Int -> Int) -> Int{
-    return int == NSDateComponentUndefined ? int : transform(int)
+    return int == Int(NSDateComponentUndefined) ? int : transform(int)
 }
 
 public prefix func -(rhs: NSDateComponents) -> NSDateComponents {

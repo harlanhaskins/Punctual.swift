@@ -26,6 +26,7 @@ class PunctualTests: XCTestCase {
         println(1.day.ago)
         println(10.days.untilDate(NSDate()))
         println((1.day + 2.months + 6.years).fromNow)
+        println((4.days + 9.hours + 32.minutes).fromNow?.timeIntervalSinceNow)
     }
     
     func testPerformanceExample() {
