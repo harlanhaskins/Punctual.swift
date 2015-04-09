@@ -23,15 +23,18 @@ class PunctualTests: XCTestCase {
     }
     
     func testYesterday() {
-        println(10.days.untilDate(NSDate()))
-        println((10000000000.days + 2.months + (-9999999999999999).years).fromNow)
-        println((4.days + 9.hours + 32.minutes).fromNow?.timeIntervalSinceNow)
         
+        println(1.day.ago)
+        println(10.days.until(NSDate()))
+        println((1.day + 2.months - 9.years).ago)
+        println(NSDate() - 1.day.ago!)
+        println((4.days + 9.hours + 32.minutes).timeInterval)
+        println(1.year.timeInterval)
     }
     
     func testDateSubtraction() {
         let first = NSDate()
-        XCTAssertEqual(1, (first - 1.day.untilDate(first)!).day, "Subtraction should return appropriate date.")
+        XCTAssertEqual(1, (first - 1.day.until(first)!).day, "Subtraction should return appropriate date.")
     }
     
 }

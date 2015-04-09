@@ -128,23 +128,36 @@ extension Int {
 /// MARK: NSDateComponents extensions
 
 extension NSDateComponents {
+    /// Returns a date that occured "the receiver's components" before now.
     public var ago: NSDate? {
-        return self.untilDate(NSDate())
+        return self.until(NSDate())
     }
     
+    /// Returns the date that will occur once the receiver's components pass after now.
     public var fromNow: NSDate? {
-        return self.fromDate(NSDate())
+        return self.from(NSDate())
     }
     
-    public func fromDate(date: NSDate) -> NSDate? {
+    /// Returns the date that will occur once the receiver's components pass after the provide date.
+    public func from(date: NSDate) -> NSDate? {
         return NSCalendar.currentCalendar().dateByAddingComponents(self, toDate: date, options: NSCalendarOptions.allZeros)
     }
     
-    public func untilDate(date: NSDate) -> NSDate? {
-        return (-self).fromDate(date)
+    /// Returns a date that occured "the receiver's components" before the provided date.
+    public func until(date: NSDate) -> NSDate? {
+        return (-self).from(date)
+    }
+    
+    /// An NSTimeInterval representing the delta, in seconds, of an NSDateComponents instance.
+    public var timeInterval: NSTimeInterval? {
+        let templateDate = NSDate()
+        let finalDate = templateDate + self
+        return finalDate?.timeIntervalSinceDate(templateDate)
     }
 }
 
+/// Applies the `transform` to the two `Ints` provided, unless either of them is
+/// `NSDateComponentUndefined`
 private func applyIfDefined(int: Int, otherInt: Int,  transform: (Int, Int) -> Int) -> Int{
     switch (int, otherInt) {
     case (_, Int(NSDateComponentUndefined)): return int
@@ -153,10 +166,14 @@ private func applyIfDefined(int: Int, otherInt: Int,  transform: (Int, Int) -> I
     }
 }
 
+/// Applies the `transform` to the `int`
+/// iff `int != NSDateComponentUndefined`
 private func applyIfDefined(int: Int, transform: Int -> Int) -> Int{
     return int == Int(NSDateComponentUndefined) ? int : transform(int)
 }
 
+/// Returns a new `NSDateComponents` that represents the negative of all values within the
+/// components that are not `NSDateComponentUndefined`.
 public prefix func -(rhs: NSDateComponents) -> NSDateComponents {
     let components = NSDateComponents()
     components.era = applyIfDefined(rhs.era, -)
@@ -176,7 +193,9 @@ public prefix func -(rhs: NSDateComponents) -> NSDateComponents {
     return components
 }
 
-public func combine(lhs: NSDateComponents, rhs: NSDateComponents, transform: (Int, Int) -> Int) -> NSDateComponents {
+/// Combines two date components using the provided `transform` on all 
+/// values within the components that are not `NSDateComponentUndefined`.
+private func combine(lhs: NSDateComponents, rhs: NSDateComponents, transform: (Int, Int) -> Int) -> NSDateComponents {
     let components = NSDateComponents()
     components.era = applyIfDefined(lhs.era, rhs.era, transform)
     components.year = applyIfDefined(lhs.year, rhs.year, transform)
@@ -195,21 +214,22 @@ public func combine(lhs: NSDateComponents, rhs: NSDateComponents, transform: (In
     return components
 }
 
+/// Adds two NSDateComponents and returns their combined individual components.
 public func +(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents {
     return combine(lhs, rhs, +)
 }
 
+/// Subtracts two NSDateComponents and returns the relative difference between them.
 public func -(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents {
     return combine(lhs, rhs, -)
 }
 
 /// MARK: NSDate extensions
 
-extension NSDate {
-    
-}
+extension NSDate {}
 
 extension NSCalendarUnit {
+    /// Shortcut for 'all calendar units'.
     static var allValues: NSCalendarUnit {
         return  NSCalendarUnit.CalendarUnitEra
               | NSCalendarUnit.CalendarUnitYear
@@ -230,14 +250,25 @@ extension NSCalendarUnit {
     }
 }
 
+/// Subtracts two dates and returns the relative components from `lhs` to `rhs`.
+/// Follows this mathematical pattern:
+///     let difference = lhs - rhs
+///     rhs + difference = lhs
 public func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents {
     return NSCalendar.currentCalendar().components(NSCalendarUnit.allValues, fromDate: rhs, toDate: lhs, options: .MatchStrictly)
 }
 
+/// Adds date components to a date and returns a new date.
 public func +(lhs: NSDate, rhs: NSDateComponents) -> NSDate? {
-    return NSCalendar.currentCalendar().dateByAddingComponents(rhs, toDate: lhs, options: NSCalendarOptions.MatchStrictly)
+    return rhs.from(lhs)
 }
 
+/// Adds date components to a date and returns a new date.
 public func +(lhs: NSDateComponents, rhs: NSDate) -> NSDate? {
     return rhs + lhs
+}
+
+/// Subtracts date components from a date and returns a new date.
+public func -(lhs: NSDate, rhs: NSDateComponents) -> NSDate? {
+    return lhs + (-rhs)
 }
