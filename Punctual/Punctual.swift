@@ -233,3 +233,11 @@ extension NSCalendarUnit {
 public func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents {
     return NSCalendar.currentCalendar().components(NSCalendarUnit.allValues, fromDate: rhs, toDate: lhs, options: .MatchStrictly)
 }
+
+public func +(lhs: NSDate, rhs: NSDateComponents) -> NSDate? {
+    return NSCalendar.currentCalendar().dateByAddingComponents(rhs, toDate: lhs, options: NSCalendarOptions.MatchStrictly)
+}
+
+public func +(lhs: NSDateComponents, rhs: NSDate) -> NSDate? {
+    return rhs + lhs
+}
