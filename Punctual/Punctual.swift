@@ -205,3 +205,31 @@ public func -(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents 
 
 /// MARK: NSDate extensions
 
+extension NSDate {
+    
+}
+
+extension NSCalendarUnit {
+    static var allValues: NSCalendarUnit {
+        return  NSCalendarUnit.CalendarUnitEra
+              | NSCalendarUnit.CalendarUnitYear
+              | NSCalendarUnit.CalendarUnitMonth
+              | NSCalendarUnit.CalendarUnitDay
+              | NSCalendarUnit.CalendarUnitHour
+              | NSCalendarUnit.CalendarUnitMinute
+              | NSCalendarUnit.CalendarUnitSecond
+              | NSCalendarUnit.CalendarUnitWeekday
+              | NSCalendarUnit.CalendarUnitWeekdayOrdinal
+              | NSCalendarUnit.CalendarUnitQuarter
+              | NSCalendarUnit.CalendarUnitWeekOfMonth
+              | NSCalendarUnit.CalendarUnitWeekOfYear
+              | NSCalendarUnit.CalendarUnitYearForWeekOfYear
+              | NSCalendarUnit.CalendarUnitNanosecond
+              | NSCalendarUnit.CalendarUnitCalendar
+              | NSCalendarUnit.CalendarUnitTimeZone
+    }
+}
+
+public func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents {
+    return NSCalendar.currentCalendar().components(NSCalendarUnit.allValues, fromDate: rhs, toDate: lhs, options: .MatchStrictly)
+}
