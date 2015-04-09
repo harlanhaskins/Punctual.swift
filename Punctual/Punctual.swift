@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// MARK: Int extensions
+
 extension Int {
     public var era: NSDateComponents {
         let components = NSDateComponents()
@@ -123,6 +125,8 @@ extension Int {
     }
 }
 
+/// MARK: NSDateComponents extensions
+
 extension NSDateComponents {
     public var ago: NSDate? {
         return self.untilDate(NSDate())
@@ -172,21 +176,32 @@ public prefix func -(rhs: NSDateComponents) -> NSDateComponents {
     return components
 }
 
-public func +(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents {
+public func combine(lhs: NSDateComponents, rhs: NSDateComponents, transform: (Int, Int) -> Int) -> NSDateComponents {
     let components = NSDateComponents()
-    components.era = applyIfDefined(lhs.era, rhs.era, +)
-    components.year = applyIfDefined(lhs.year, rhs.year, +)
-    components.month = applyIfDefined(lhs.month, rhs.month, +)
-    components.day = applyIfDefined(lhs.day, rhs.day, +)
-    components.hour = applyIfDefined(lhs.hour, rhs.hour, +)
-    components.minute = applyIfDefined(lhs.minute, rhs.minute, +)
-    components.second = applyIfDefined(lhs.second, rhs.second, +)
-    components.nanosecond = applyIfDefined(lhs.nanosecond, rhs.nanosecond, +)
-    components.weekday = applyIfDefined(lhs.weekday, rhs.weekday, +)
-    components.weekdayOrdinal = applyIfDefined(lhs.weekdayOrdinal, rhs.weekdayOrdinal, +)
-    components.quarter = applyIfDefined(lhs.quarter, rhs.quarter, +)
-    components.weekOfMonth = applyIfDefined(lhs.weekOfMonth, rhs.weekOfMonth, +)
-    components.weekOfYear = applyIfDefined(lhs.weekOfYear, rhs.weekOfYear, +)
-    components.yearForWeekOfYear = applyIfDefined(lhs.yearForWeekOfYear, rhs.yearForWeekOfYear, +)
+    components.era = applyIfDefined(lhs.era, rhs.era, transform)
+    components.year = applyIfDefined(lhs.year, rhs.year, transform)
+    components.month = applyIfDefined(lhs.month, rhs.month, transform)
+    components.day = applyIfDefined(lhs.day, rhs.day, transform)
+    components.hour = applyIfDefined(lhs.hour, rhs.hour, transform)
+    components.minute = applyIfDefined(lhs.minute, rhs.minute, transform)
+    components.second = applyIfDefined(lhs.second, rhs.second, transform)
+    components.nanosecond = applyIfDefined(lhs.nanosecond, rhs.nanosecond, transform)
+    components.weekday = applyIfDefined(lhs.weekday, rhs.weekday, transform)
+    components.weekdayOrdinal = applyIfDefined(lhs.weekdayOrdinal, rhs.weekdayOrdinal, transform)
+    components.quarter = applyIfDefined(lhs.quarter, rhs.quarter, transform)
+    components.weekOfMonth = applyIfDefined(lhs.weekOfMonth, rhs.weekOfMonth, transform)
+    components.weekOfYear = applyIfDefined(lhs.weekOfYear, rhs.weekOfYear, transform)
+    components.yearForWeekOfYear = applyIfDefined(lhs.yearForWeekOfYear, rhs.yearForWeekOfYear, transform)
     return components
 }
+
+public func +(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents {
+    return combine(lhs, rhs, +)
+}
+
+public func -(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents {
+    return combine(lhs, rhs, -)
+}
+
+/// MARK: NSDate extensions
+
