@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 harlanhaskins. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 
 //! Project version number for Punctual.
 FOUNDATION_EXPORT double PunctualVersionNumber;

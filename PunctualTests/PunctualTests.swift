@@ -23,9 +23,9 @@ class PunctualTests: XCTestCase {
     }
     
     func testYesterday() {
-        println(1.day.ago)
+        println(1.nanosecond.ago)
         println(10.days.until(NSDate()))
-        println((2.days + 1.month - 9.years).fromNow)
+        println((1.day + 2.months - 9.years).ago)
         println(NSDate() - 1.day.ago!)
         println((4.days + 9.hours + 32.minutes).timeInterval)
         println(1.year.timeInterval)
