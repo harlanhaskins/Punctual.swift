@@ -221,7 +221,7 @@ public func +(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents 
 
 /// Subtracts two NSDateComponents and returns the relative difference between them.
 public func -(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents {
-    return combine(lhs, rhs, -)
+    return lhs + (-rhs)
 }
 
 /// MARK: NSDate extensions
