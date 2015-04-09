@@ -2,7 +2,13 @@
 Swift dates, more fun. Heavily inspired by [ObjectiveSugar](https://github.com/supermarin/objectivesugar)
 
 # Installation
-This project is very, very early, and is subject to change at a moment's notice. I'll put it on `CocoaPods` when it's closer to release.
+Punctual is available through [CocoaPods](http://cocoapods.org)!
+
+Just add this line
+```ruby
+pod 'Punctual'
+```
+to your `Podfile`
 
 # Contents
 `Punctual` extends `Int`, `NSDateComponents`, `NSDate`, and `NSCalendarUnit`, and adds features to make them work well together.
