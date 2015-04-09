@@ -15,7 +15,7 @@ println(10.days.until(NSDate()))
 // Optional(2015-03-30 04:11:03 +0000)
 
 println((1.day + 2.months - 9.years).ago)
-// Optional(2006-02-08 05:49:30 +0000)
+// Optional(2024-02-08 18:28:26 +0000)
 
 println(NSDate() - 1.day.ago!)
 /* <NSDateComponents: 0x7fbbaad949d0>
