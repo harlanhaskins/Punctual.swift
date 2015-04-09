@@ -5,7 +5,7 @@ Swift dates, more fun. Heavily inspired by [ObjectiveSugar](https://github.com/s
 This project is very, very early, and is subject to change at a moment's notice. I'll put it on `CocoaPods` when it's closer to release.
 
 # Contents
-`Punctual` extends `Int` and `NSDateComponents` and adds features to make them work well together.
+`Punctual` extends `Int`, `NSDateComponents`, `NSDate`, and `NSCalendarUnit`, and adds features to make them work well together.
 
 ```swift
 println(1.day.ago)
