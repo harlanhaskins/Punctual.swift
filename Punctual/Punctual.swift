@@ -160,8 +160,8 @@ extension NSDateComponents {
 /// `NSDateComponentUndefined`
 private func applyIfDefined(int: Int, otherInt: Int,  transform: (Int, Int) -> Int) -> Int{
     switch (int, otherInt) {
-    case (_, Int(NSDateComponentUndefined)): return int
-    case (Int(NSDateComponentUndefined), _): return otherInt
+    case (_, Int(NSDateComponentUndefined)): return transform(0, int)
+    case (Int(NSDateComponentUndefined), _): return transform(0, otherInt)
     default: return transform(int, otherInt)
     }
 }
@@ -226,7 +226,101 @@ public func -(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents 
 
 /// MARK: NSDate extensions
 
-extension NSDate {}
+extension NSDate {
+    public var isToday: Bool {
+        return (self - 0.days.ago!).day == 0
+    }
+    public var isYesterday: Bool {
+        return (self - 1.days.ago!).day == 0
+    }
+    public var era: Int {
+        return self.components.era
+    }
+    public var eras: Int {
+        return self.era
+    }
+    public var year: Int {
+        return self.components.year
+    }
+    public var years: Int {
+        return self.year
+    }
+    public var month: Int {
+        return self.components.month
+    }
+    public var months: Int {
+        return self.month
+    }
+    public var day: Int {
+        return self.components.day
+    }
+    public var days: Int {
+        return self.day
+    }
+    public var hour: Int {
+        return self.components.hour
+    }
+    public var hours: Int {
+        return self.hour
+    }
+    public var minute: Int {
+        return self.components.minute
+    }
+    public var minutes: Int {
+        return self.minute
+    }
+    public var second: Int {
+        return self.components.second
+    }
+    public var seconds: Int {
+        return self.second
+    }
+    public var nanosecond: Int {
+        return self.components.nanosecond
+    }
+    public var nanoseconds: Int {
+        return self.nanosecond
+    }
+    public var weekday: Int {
+        return self.components.weekday
+    }
+    public var weekdays: Int {
+        return self.weekday
+    }
+    public var weekdayOrdinal: Int {
+        return self.components.weekdayOrdinal
+    }
+    public var weekdayOrdinals: Int {
+        return self.weekdayOrdinal
+    }
+    public var quarter: Int {
+        return self.components.quarter
+    }
+    public var quarters: Int {
+        return self.quarter
+    }
+    public var weekOfMonth: Int {
+        return self.components.weekOfMonth
+    }
+    public var weekOfMonths: Int {
+        return self.weekOfMonth
+    }
+    public var weekOfYear: Int {
+        return self.components.weekOfYear
+    }
+    public var weekOfYears: Int {
+        return self.weekOfYear
+    }
+    public var yearForWeekOfYear: Int {
+        return self.components.yearForWeekOfYear
+    }
+    public var yearForWeekOfYears: Int {
+        return self.yearForWeekOfYear
+    }
+    public var components: NSDateComponents {
+        return NSCalendar.currentCalendar().components(NSCalendarUnit.allValues, fromDate: self)
+    }
+}
 
 extension NSCalendarUnit {
     /// Shortcut for 'all calendar units'.
