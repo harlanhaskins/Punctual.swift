@@ -226,7 +226,12 @@ public func -(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents 
 
 /// MARK: NSDate extensions
 
-extension NSDate {
+extension NSDate: Comparable {
+    private struct Constants {
+        // Create one instance of NSDateFormatter because
+        // NSFormatters are expensive to allocate.
+        static let formatter = NSDateFormatter()
+    }
     public var isToday: Bool {
         return NSCalendar.currentCalendar().isDateInToday(self)
     }
@@ -239,6 +244,59 @@ extension NSDate {
     public var isWeekend: Bool {
         return NSCalendar.currentCalendar().isDateInWeekend(self)
     }
+    
+    public func stringWithFormat(format: String) -> String {
+        Constants.formatter.dateFormat = format
+        let date = Constants.formatter.stringFromDate(self)
+        Constants.formatter.dateFormat = nil
+        return date
+    }
+    
+    public func stringWithDateStyle(dateStyle: NSDateFormatterStyle, timeStyle: NSDateFormatterStyle) -> String {
+        Constants.formatter.dateStyle = dateStyle
+        Constants.formatter.timeStyle = timeStyle
+        let date = Constants.formatter.stringFromDate(self)
+        Constants.formatter.dateStyle = .NoStyle
+        Constants.formatter.timeStyle = .NoStyle
+        return date
+    }
+    
+    public var shortString: String {
+        return self.stringWithDateStyle(.ShortStyle, timeStyle: .ShortStyle)
+    }
+    
+    public var shortTimeString: String {
+        return self.stringWithDateStyle(.NoStyle, timeStyle: .ShortStyle)
+    }
+    
+    public var shortDateString: String {
+        return self.stringWithDateStyle(.ShortStyle, timeStyle: .NoStyle)
+    }
+    
+    public var mediumString: String {
+        return self.stringWithDateStyle(.MediumStyle, timeStyle: .MediumStyle)
+    }
+    
+    public var mediumTimeString: String {
+        return self.stringWithDateStyle(.NoStyle, timeStyle: .MediumStyle)
+    }
+    
+    public var mediumDateString: String {
+        return self.stringWithDateStyle(.MediumStyle, timeStyle: .NoStyle)
+    }
+    
+    public var longString: String {
+        return self.stringWithDateStyle(.LongStyle, timeStyle: .LongStyle)
+    }
+    
+    public var longTimeString: String {
+        return self.stringWithDateStyle(.NoStyle, timeStyle: .LongStyle)
+    }
+    
+    public var longDateString: String {
+        return self.stringWithDateStyle(.LongStyle, timeStyle: .NoStyle)
+    }
+    
     public var era: Int {
         return self.components.era
     }
@@ -348,6 +406,14 @@ extension NSCalendarUnit {
               | NSCalendarUnit.CalendarUnitCalendar
               | NSCalendarUnit.CalendarUnitTimeZone
     }
+}
+
+public func <(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == .OrderedAscending
+}
+
+public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.isEqualToDate(rhs)
 }
 
 /// Subtracts two dates and returns the relative components from `lhs` to `rhs`.
