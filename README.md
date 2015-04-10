@@ -11,7 +11,7 @@ pod 'Punctual'
 to your `Podfile`
 
 # Contents
-`Punctual` extends `Int`, `NSDateComponents`, `NSDate`, and `NSCalendarUnit`, and adds features to make them work well together.
+`Punctual` extends `Int`, `NSDateComponents`, `NSDate`, and `NSCalendarUnit`, and adds features to make them work well together. It uses the robust `NSCalendar` APIs, so you can be sure it's accurate!
 
 ```swift
 println(1.day.ago)
