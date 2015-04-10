@@ -42,4 +42,14 @@ println(NSDate() - 1.day.ago!)
 
 println(1.year.timeInterval)
 // Optional(31622400.0)
+
+println((NSDate() + 30.minutes)!.nearestHour)
+// 1
+
+println(4.years.fromNow?.longTimeString)
+// Optional("12:11:44 AM EDT")
+
+println(4.years.fromNow?.stringWithFormat("HH:mm"))
+// Optional("00:11")
+
 ```

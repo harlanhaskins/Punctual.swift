@@ -231,6 +231,7 @@ extension NSDate: Comparable {
         // Create one instance of NSDateFormatter because
         // NSFormatters are expensive to allocate.
         static let formatter = NSDateFormatter()
+        static let minutesPerHour = 60
     }
     public var isToday: Bool {
         return NSCalendar.currentCalendar().isDateInToday(self)
@@ -243,6 +244,15 @@ extension NSDate: Comparable {
     }
     public var isWeekend: Bool {
         return NSCalendar.currentCalendar().isDateInWeekend(self)
+    }
+    public var isInPast: Bool {
+        return self < NSDate()
+    }
+    public var isInFuture: Bool {
+        return self > NSDate()
+    }
+    public var nearestHour: Int {
+        return self.minutes > (Constants.minutesPerHour / 2) ? self.hour + 1 : self.hour
     }
     
     public func stringWithFormat(format: String) -> String {
