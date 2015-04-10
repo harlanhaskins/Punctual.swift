@@ -228,10 +228,16 @@ public func -(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents 
 
 extension NSDate {
     public var isToday: Bool {
-        return (self - 0.days.ago!).day == 0
+        return NSCalendar.currentCalendar().isDateInToday(self)
     }
     public var isYesterday: Bool {
-        return (self - 1.days.ago!).day == 0
+        return NSCalendar.currentCalendar().isDateInYesterday(self)
+    }
+    public var isTomorrow: Bool {
+        return NSCalendar.currentCalendar().isDateInTomorrow(self)
+    }
+    public var isWeekend: Bool {
+        return NSCalendar.currentCalendar().isDateInWeekend(self)
     }
     public var era: Int {
         return self.components.era
