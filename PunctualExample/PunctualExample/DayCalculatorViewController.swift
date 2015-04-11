@@ -46,7 +46,7 @@ class DayCalculatorViewController: UIViewController {
     }
     @IBOutlet weak var monthsTextField: UITextField!
     var months: NSDateComponents? {
-        return self.monthsTextField.text.toInt()?.days
+        return self.monthsTextField.text.toInt()?.months
     }
     @IBOutlet weak var yearsTextField: UITextField!
     var years: NSDateComponents? {
