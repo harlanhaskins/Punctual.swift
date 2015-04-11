@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = "Punctual"
-  s.version     = "0.0.1"
+  s.version     = "0.0.2"
   s.summary     = "Swift dates, more fun!"
   s.homepage    = "https://github.com/harlanhaskins/Punctual.swift"
   s.license     = { :type => "MIT" }
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
 
   s.osx.deployment_target = "10.10"
   s.ios.deployment_target = "8.0"
-  s.source   = { :git => "https://github.com/harlanhaskins/Punctual.swift.git", :tag => "0.0.1"}
+  s.source   = { :git => "https://github.com/harlanhaskins/Punctual.swift.git", :tag => "0.0.2"}
   s.source_files = "Punctual/Punctual.{h,swift}"
   s.requires_arc = true
 end

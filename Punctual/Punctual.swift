@@ -75,6 +75,12 @@ extension Int {
     public var nanoseconds: NSDateComponents {
         return self.nanosecond
     }
+    public var millisecond: NSDateComponents {
+        return (1000000 * self).nanoseconds
+    }
+    public var milliseconds: NSDateComponents {
+        return self.millisecond
+    }
     public var weekday: NSDateComponents {
         let components = NSDateComponents()
         components.weekday = self

@@ -33,8 +33,6 @@ class PunctualTests: XCTestCase {
         println(4.years.fromNow?.longTimeString)
         println(4.years.fromNow?.stringWithFormat("HH:mm"))
         println(4.years.fromNow?.shortString)
-        println(4.years.fromNow?.shortString)
-        println(4.years.fromNow?.longTimeString)
     }
     
     func testDateSubtraction() {
