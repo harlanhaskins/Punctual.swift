@@ -29,7 +29,7 @@ class DayCalculatorViewController: UIViewController {
             months = self.months,
             years = self.years,
             newDate = (hours + days + months + years).ago {
-            self.dateLabel.text = newDate.longDateString
+            self.dateLabel.text = newDate.mediumString
         } else {
             self.dateLabel.text = "Invalid Date"
         }
