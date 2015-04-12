@@ -15,7 +15,7 @@
 		C928CC531AD9981D004E44B3 /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C928CC521AD9981D004E44B3 /* StopwatchViewController.swift */; };
 		C9762D051AD998D60022946D /* Punctual.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9762D041AD998D60022946D /* Punctual.swift */; };
 		C9762D071AD99E7B0022946D /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9762D061AD99E7B0022946D /* TimerViewController.swift */; };
-		C9762D091AD9C8AF0022946D /* DayCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9762D081AD9C8AF0022946D /* DayCalculatorViewController.swift */; };
+		C9762D091AD9C8AF0022946D /* DateCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9762D081AD9C8AF0022946D /* DateCalculatorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +41,7 @@
 		C928CC521AD9981D004E44B3 /* StopwatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopwatchViewController.swift; sourceTree = "<group>"; };
 		C9762D041AD998D60022946D /* Punctual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Punctual.swift; path = ../../Punctual/Punctual.swift; sourceTree = "<group>"; };
 		C9762D061AD99E7B0022946D /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
-		C9762D081AD9C8AF0022946D /* DayCalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCalculatorViewController.swift; sourceTree = "<group>"; };
+		C9762D081AD9C8AF0022946D /* DateCalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCalculatorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +86,7 @@
 				C928CC301AD99495004E44B3 /* AppDelegate.swift */,
 				C928CC521AD9981D004E44B3 /* StopwatchViewController.swift */,
 				C928CC361AD99495004E44B3 /* Main.storyboard */,
-				C9762D081AD9C8AF0022946D /* DayCalculatorViewController.swift */,
+				C9762D081AD9C8AF0022946D /* DateCalculatorViewController.swift */,
 				C9762D061AD99E7B0022946D /* TimerViewController.swift */,
 				C928CC391AD99495004E44B3 /* Images.xcassets */,
 				C928CC3B1AD99495004E44B3 /* LaunchScreen.xib */,
@@ -222,7 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9762D071AD99E7B0022946D /* TimerViewController.swift in Sources */,
-				C9762D091AD9C8AF0022946D /* DayCalculatorViewController.swift in Sources */,
+				C9762D091AD9C8AF0022946D /* DateCalculatorViewController.swift in Sources */,
 				C928CC531AD9981D004E44B3 /* StopwatchViewController.swift in Sources */,
 				C9762D051AD998D60022946D /* Punctual.swift in Sources */,
 				C928CC311AD99495004E44B3 /* AppDelegate.swift in Sources */,
