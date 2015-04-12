@@ -59,6 +59,7 @@
                     <toolbarItems/>
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
+                        <segue destination="h7X-Fj-rux" kind="relationship" relationship="detailViewController" id="8MY-TM-3uj"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZU-Oi-B1e" sceneMemberID="firstResponder"/>
@@ -125,7 +126,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Day of Week Calculator" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p7t-ng-w8S">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Date Calculator" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p7t-ng-w8S">
                                                     <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -147,13 +148,60 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Punctual" id="Zdf-7t-Un8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="709" y="-630"/>
         </scene>
-        <!--Stopwatch View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="HOq-YK-rLU">
+            <objects>
+                <navigationController id="h7X-Fj-rux" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Evr-kZ-EBR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="DB6-ui-6Mz" kind="relationship" relationship="rootViewController" id="uAH-AW-Rs8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kZE-TW-UkJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-183" y="2126"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="CwK-HR-J47">
+            <objects>
+                <viewController id="DB6-ui-6Mz" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9XT-gs-5cW"/>
+                        <viewControllerLayoutGuide type="bottom" id="7YG-lt-iHe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B9p-eG-8nk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an Example" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rzp-GB-cou">
+                                <rect key="frame" x="233" y="290" width="135" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="Rzp-GB-cou" secondAttribute="centerY" id="mzB-bc-zdD"/>
+                            <constraint firstAttribute="centerX" secondItem="Rzp-GB-cou" secondAttribute="centerX" id="zzP-j2-Mx3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="f04-wc-A6M"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Zp-4k-y0S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="490" y="2126"/>
+        </scene>
+        <!--Stopwatch-->
         <scene sceneID="6CL-FR-Dda">
             <objects>
                 <viewController id="5OU-XE-IhA" customClass="StopwatchViewController" customModule="PunctualExample" customModuleProvider="target" sceneMemberID="viewController">
@@ -212,7 +260,7 @@
                             <constraint firstItem="quv-9V-spE" firstAttribute="centerX" secondItem="40g-bM-HGZ" secondAttribute="centerX" id="w2Y-qU-OXA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jQ7-bw-AdK"/>
+                    <navigationItem key="navigationItem" title="Stopwatch" id="jQ7-bw-AdK"/>
                     <connections>
                         <outlet property="clockLabel" destination="vWk-rC-wD7" id="1ya-AE-Vdk"/>
                     </connections>
@@ -237,7 +285,7 @@
             </objects>
             <point key="canvasLocation" x="-183" y="1447"/>
         </scene>
-        <!--Timer View Controller-->
+        <!--Timer-->
         <scene sceneID="DWH-DI-hhb">
             <objects>
                 <viewController id="V0S-yp-PBm" customClass="TimerViewController" customModule="PunctualExample" customModuleProvider="target" sceneMemberID="viewController">
@@ -305,7 +353,7 @@
                             <constraint firstAttribute="centerX" secondItem="cEE-kg-u5i" secondAttribute="centerX" constant="25" id="w9r-2I-QFx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="W9c-A9-B8J"/>
+                    <navigationItem key="navigationItem" title="Timer" id="W9c-A9-B8J"/>
                     <connections>
                         <outlet property="secondsTextField" destination="cEE-kg-u5i" id="CC7-70-Mf7"/>
                     </connections>
@@ -314,10 +362,10 @@
             </objects>
             <point key="canvasLocation" x="490" y="776"/>
         </scene>
-        <!--Day Calculator View Controller-->
+        <!--Date Calculator-->
         <scene sceneID="aQ0-4G-Z3m">
             <objects>
-                <viewController id="4od-BW-JLe" customClass="DayCalculatorViewController" customModule="PunctualExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4od-BW-JLe" customClass="DateCalculatorViewController" customModule="PunctualExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cWB-Km-NbP"/>
                         <viewControllerLayoutGuide type="bottom" id="RtI-Eb-gQi"/>
@@ -326,7 +374,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wednesday, March 14th, 2015" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xyW-bK-2cg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wednesday, March 14th, 2015" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xyW-bK-2cg">
                                 <rect key="frame" x="31" y="84" width="538" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -420,7 +468,7 @@
                             <constraint firstItem="eBz-tO-NiB" firstAttribute="baseline" secondItem="rzQ-84-kxC" secondAttribute="baseline" id="zEc-VS-EXK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="RnB-xJ-CWf"/>
+                    <navigationItem key="navigationItem" title="Date Calculator" id="RnB-xJ-CWf"/>
                     <connections>
                         <outlet property="dateLabel" destination="xyW-bK-2cg" id="v27-Tf-Itt"/>
                         <outlet property="daysTextField" destination="YgD-4Z-7cS" id="s2n-zc-kj5"/>

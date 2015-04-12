@@ -1,5 +1,5 @@
 //
-//  DayCalculatorViewController.swift
+//  DateCalculatorViewController.swift
 //  PunctualExample
 //
 //  Created by Harlan Haskins on 4/11/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DayCalculatorViewController: UIViewController {
+class DateCalculatorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class DayCalculatorViewController: UIViewController {
             months = self.months,
             years = self.years,
             newDate = (hours + days + months + years).ago {
-            self.dateLabel.text = newDate.mediumString
+            self.dateLabel.text = newDate.longString
         } else {
             self.dateLabel.text = "Invalid Date"
         }
