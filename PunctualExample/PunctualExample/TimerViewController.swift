@@ -14,16 +14,6 @@ class TimerViewController: UIViewController {
     var timer: NSTimer?
     var endDate: NSDate? = nil
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func didTapStart(sender: UIButton) {
         self.timer = NSTimer(timeInterval: 1.second.timeInterval!, target: self, selector: "updateCountdown", userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(self.timer!, forMode: NSDefaultRunLoopMode)
@@ -35,7 +25,7 @@ class TimerViewController: UIViewController {
     
     func updateCountdown() {
         if let end = self.endDate {
-            if end.timeIntervalSinceDate(NSDate()) <= 0 {
+            if end.timeIntervalSinceNow <= 0 {
                 self.showTimerAlert()
                 self.endDate = nil
             }
@@ -64,16 +54,7 @@ class TimerViewController: UIViewController {
     
     @IBAction func didTapReset(sender: UIButton) {
         self.endDate = nil
+        self.didTapStop(sender)
+        self.secondsTextField.text = "0"
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

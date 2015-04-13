@@ -13,8 +13,6 @@ class DateCalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateDate()
-
-        // Do any additional setup after loading the view.
     }
     
     func updateDate() {
