@@ -43,29 +43,36 @@ class StopwatchViewController: UIViewController {
     }
     
     deinit {
-        self.timer?.invalidate()
+        self.stopTimer()
     }
-
-    @IBAction func didTapStart(sender: AnyObject) {
+    
+    func startTimer() {
+        self.resetTimer()
         self.timer = NSTimer(timeInterval: 1.millisecond.timeInterval!, target: self, selector: "updateClock", userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(self.timer!, forMode: NSDefaultRunLoopMode)
     }
     
-    @IBAction func didTapStop(sender: AnyObject) {
+    func resetTimer() {
+        self.stopTimer()
+        self.currentTime = 0
+        self.updateClock()
+    }
+    
+    func stopTimer() {
         self.timer?.invalidate()
         self.timer = nil
     }
+
+    @IBAction func didTapStart(sender: AnyObject) {
+        self.startTimer()
+    }
+    
+    @IBAction func didTapStop(sender: AnyObject) {
+        self.stopTimer()
+    }
     
     @IBAction func didTapReset(sender: AnyObject) {
-        self.currentTime = 0
-        self.updateClock()
-        self.didTapStop(sender)
+        self.resetTimer()
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
 }
