@@ -134,22 +134,22 @@ extension Int {
 /// MARK: NSDateComponents extensions
 
 extension NSDateComponents {
-    /// Returns a date that occured "the receiver's components" before now.
+    /// :returns: a date that occured "the receiver's components" before now.
     public var ago: NSDate? {
         return self.until(NSDate())
     }
     
-    /// Returns the date that will occur once the receiver's components pass after now.
+    /// :returns: the date that will occur once the receiver's components pass after now.
     public var fromNow: NSDate? {
         return self.from(NSDate())
     }
     
-    /// Returns the date that will occur once the receiver's components pass after the provide date.
+    /// :returns: the date that will occur once the receiver's components pass after the provide date.
     public func from(date: NSDate) -> NSDate? {
         return NSCalendar.currentCalendar().dateByAddingComponents(self, toDate: date, options: NSCalendarOptions.allZeros)
     }
     
-    /// Returns a date that occured "the receiver's components" before the provided date.
+    /// :returns: a date that occured "the receiver's components" before the provided date.
     public func until(date: NSDate) -> NSDate? {
         return (-self).from(date)
     }
@@ -178,7 +178,7 @@ private func applyIfDefined(int: Int, transform: Int -> Int) -> Int{
     return int == Int(NSDateComponentUndefined) ? int : transform(int)
 }
 
-/// Returns a new `NSDateComponents` that represents the negative of all values within the
+/// :returns: a new `NSDateComponents` that represents the negative of all values within the
 /// components that are not `NSDateComponentUndefined`.
 public prefix func -(rhs: NSDateComponents) -> NSDateComponents {
     let components = NSDateComponents()
@@ -239,15 +239,19 @@ extension NSDate: Comparable {
         static let formatter = NSDateFormatter()
         static let minutesPerHour = 60
     }
+    @availability(iOS, introduced=8.0)
     public var isToday: Bool {
         return NSCalendar.currentCalendar().isDateInToday(self)
     }
+    @availability(iOS, introduced=8.0)
     public var isYesterday: Bool {
         return NSCalendar.currentCalendar().isDateInYesterday(self)
     }
+    @availability(iOS, introduced=8.0)
     public var isTomorrow: Bool {
         return NSCalendar.currentCalendar().isDateInTomorrow(self)
     }
+    @availability(iOS, introduced=8.0)
     public var isWeekend: Bool {
         return NSCalendar.currentCalendar().isDateInWeekend(self)
     }
