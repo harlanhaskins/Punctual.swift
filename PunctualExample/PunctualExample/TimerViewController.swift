@@ -17,7 +17,7 @@ class TimerViewController: UIViewController {
     @IBAction func didTapStart(sender: UIButton) {
         self.timer = NSTimer(timeInterval: 1.second.timeInterval!, target: self, selector: "updateCountdown", userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(self.timer!, forMode: NSDefaultRunLoopMode)
-        if let seconds = self.secondsTextField.text.toInt() {
+        if let text = self.secondsTextField.text, seconds = Int(text) {
             self.endDate = seconds.seconds.fromNow
         }
         self.secondsTextField?.resignFirstResponder()

@@ -134,22 +134,22 @@ extension Int {
 /// MARK: NSDateComponents extensions
 
 extension NSDateComponents {
-    /// :returns: a date that occured "the receiver's components" before now.
+    /// - returns: a date that occured "the receiver's components" before now.
     public var ago: NSDate? {
         return self.until(NSDate())
     }
     
-    /// :returns: the date that will occur once the receiver's components pass after now.
+    /// - returns: the date that will occur once the receiver's components pass after now.
     public var fromNow: NSDate? {
         return self.from(NSDate())
     }
     
-    /// :returns: the date that will occur once the receiver's components pass after the provide date.
+    /// - returns: the date that will occur once the receiver's components pass after the provide date.
     public func from(date: NSDate) -> NSDate? {
-        return NSCalendar.currentCalendar().dateByAddingComponents(self, toDate: date, options: NSCalendarOptions.allZeros)
+        return NSCalendar.currentCalendar().dateByAddingComponents(self, toDate: date, options: [])
     }
     
-    /// :returns: a date that occured "the receiver's components" before the provided date.
+    /// - returns: a date that occured "the receiver's components" before the provided date.
     public func until(date: NSDate) -> NSDate? {
         return (-self).from(date)
     }
@@ -164,7 +164,7 @@ extension NSDateComponents {
 
 /// Applies the `transform` to the two `Ints` provided, unless either of them is
 /// `NSDateComponentUndefined`
-private func applyIfDefined(int: Int, otherInt: Int,  transform: (Int, Int) -> Int) -> Int{
+private func applyIfDefined(int: Int, _ otherInt: Int,  _ transform: (Int, Int) -> Int) -> Int{
     switch (int, otherInt) {
     case (_, Int(NSDateComponentUndefined)): return transform(0, int)
     case (Int(NSDateComponentUndefined), _): return transform(0, otherInt)
@@ -174,11 +174,11 @@ private func applyIfDefined(int: Int, otherInt: Int,  transform: (Int, Int) -> I
 
 /// Applies the `transform` to the `int`
 /// iff `int != NSDateComponentUndefined`
-private func applyIfDefined(int: Int, transform: Int -> Int) -> Int{
+private func applyIfDefined(int: Int, _ transform: Int -> Int) -> Int{
     return int == Int(NSDateComponentUndefined) ? int : transform(int)
 }
 
-/// :returns: a new `NSDateComponents` that represents the negative of all values within the
+/// - returns: a new `NSDateComponents` that represents the negative of all values within the
 /// components that are not `NSDateComponentUndefined`.
 public prefix func -(rhs: NSDateComponents) -> NSDateComponents {
     let components = NSDateComponents()
@@ -222,7 +222,7 @@ private func combine(lhs: NSDateComponents, rhs: NSDateComponents, transform: (I
 
 /// Adds two NSDateComponents and returns their combined individual components.
 public func +(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents {
-    return combine(lhs, rhs, +)
+    return combine(lhs, rhs: rhs, transform: +)
 }
 
 /// Subtracts two NSDateComponents and returns the relative difference between them.
@@ -239,19 +239,19 @@ extension NSDate: Comparable {
         static let formatter = NSDateFormatter()
         static let minutesPerHour = 60
     }
-    @availability(iOS, introduced=8.0)
+    @available(iOS, introduced=8.0)
     public var isToday: Bool {
         return NSCalendar.currentCalendar().isDateInToday(self)
     }
-    @availability(iOS, introduced=8.0)
+    @available(iOS, introduced=8.0)
     public var isYesterday: Bool {
         return NSCalendar.currentCalendar().isDateInYesterday(self)
     }
-    @availability(iOS, introduced=8.0)
+    @available(iOS, introduced=8.0)
     public var isTomorrow: Bool {
         return NSCalendar.currentCalendar().isDateInTomorrow(self)
     }
-    @availability(iOS, introduced=8.0)
+    @available(iOS, introduced=8.0)
     public var isWeekend: Bool {
         return NSCalendar.currentCalendar().isDateInWeekend(self)
     }
@@ -409,22 +409,7 @@ extension NSDate: Comparable {
 extension NSCalendarUnit {
     /// Shortcut for 'all calendar units'.
     static var allValues: NSCalendarUnit {
-        return  NSCalendarUnit.CalendarUnitEra
-              | NSCalendarUnit.CalendarUnitYear
-              | NSCalendarUnit.CalendarUnitMonth
-              | NSCalendarUnit.CalendarUnitDay
-              | NSCalendarUnit.CalendarUnitHour
-              | NSCalendarUnit.CalendarUnitMinute
-              | NSCalendarUnit.CalendarUnitSecond
-              | NSCalendarUnit.CalendarUnitWeekday
-              | NSCalendarUnit.CalendarUnitWeekdayOrdinal
-              | NSCalendarUnit.CalendarUnitQuarter
-              | NSCalendarUnit.CalendarUnitWeekOfMonth
-              | NSCalendarUnit.CalendarUnitWeekOfYear
-              | NSCalendarUnit.CalendarUnitYearForWeekOfYear
-              | NSCalendarUnit.CalendarUnitNanosecond
-              | NSCalendarUnit.CalendarUnitCalendar
-              | NSCalendarUnit.CalendarUnitTimeZone
+        return [.Era, .Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday, .WeekdayOrdinal, .Quarter, .WeekOfMonth, .WeekOfYear, .YearForWeekOfYear, .Nanosecond, .Calendar, .TimeZone]
     }
 }
 

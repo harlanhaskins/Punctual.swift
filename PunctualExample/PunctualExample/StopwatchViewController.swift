@@ -12,14 +12,26 @@ class StopwatchViewController: UIViewController {
 
     var timer: NSTimer?
     var currentTime: NSTimeInterval = 0
+    let intervalFormatter = NSDateComponentsFormatter()
     
     @IBOutlet weak var clockLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intervalFormatter.unitsStyle = .Positional
+        self.intervalFormatter.zeroFormattingBehavior = .Pad
+        self.intervalFormatter.allowedUnits = [.Hour, .Minute, .Second]
+            let fontDescriptor = self.clockLabel.font.fontDescriptor().fontDescriptorByAddingAttributes([
+                UIFontDescriptorFeatureSettingsAttribute: [[
+                    UIFontFeatureTypeIdentifierKey: kNumberCSpacingType,
+                    UIFontFeatureSelectorIdentifierKey: kMonospacedNumbersSelector
+                    ]]
+                ])
+            self.clockLabel.font = UIFont(descriptor: fontDescriptor, size: fontDescriptor.pointSize)
     }
     
     func updateClock() {
         self.currentTime += 1.millisecond.timeInterval!
+        
         var elapsedTime = self.currentTime
         
         //calculate the minutes in elapsed time.
@@ -40,6 +52,7 @@ class StopwatchViewController: UIViewController {
         
         //concatenate minutes, seconds and milliseconds as assign it to the UILabel
         self.clockLabel.text = "\(strMinutes):\(strSeconds):\(strFraction)"
+        
     }
     
     deinit {

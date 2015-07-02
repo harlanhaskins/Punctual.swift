@@ -36,18 +36,30 @@ class DateCalculatorViewController: UIViewController {
     
     @IBOutlet weak var hoursTextField: UITextField!
     var hours: NSDateComponents? {
-        return self.hoursTextField.text.toInt()?.hours
+        if let text = self.hoursTextField.text {
+            return Int(text)?.hours
+        }
+        return nil
     }
     @IBOutlet weak var daysTextField: UITextField!
     var days: NSDateComponents? {
-        return self.daysTextField.text.toInt()?.days
+        if let text = self.daysTextField.text {
+            return Int(text)?.days
+        }
+        return nil
     }
     @IBOutlet weak var monthsTextField: UITextField!
     var months: NSDateComponents? {
-        return self.monthsTextField.text.toInt()?.months
+        if let text = self.monthsTextField.text {
+            return Int(text)?.months
+        }
+        return nil
     }
     @IBOutlet weak var yearsTextField: UITextField!
     var years: NSDateComponents? {
-        return self.yearsTextField.text.toInt()?.years
+        if let text = self.yearsTextField.text {
+            return Int(text)?.years
+        }
+        return nil
     }
 }
