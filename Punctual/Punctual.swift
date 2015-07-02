@@ -164,7 +164,7 @@ extension NSDateComponents {
 
 /// Applies the `transform` to the two `Ints` provided, unless either of them is
 /// `NSDateComponentUndefined`
-private func applyIfDefined(int: Int, _ otherInt: Int,  _ transform: (Int, Int) -> Int) -> Int{
+internal func applyIfDefined(int: Int, _ otherInt: Int,  _ transform: (Int, Int) -> Int) -> Int{
     switch (int, otherInt) {
     case (_, Int(NSDateComponentUndefined)): return transform(0, int)
     case (Int(NSDateComponentUndefined), _): return transform(0, otherInt)
@@ -174,7 +174,7 @@ private func applyIfDefined(int: Int, _ otherInt: Int,  _ transform: (Int, Int) 
 
 /// Applies the `transform` to the `int`
 /// iff `int != NSDateComponentUndefined`
-private func applyIfDefined(int: Int, _ transform: Int -> Int) -> Int{
+internal func applyIfDefined(int: Int, _ transform: Int -> Int) -> Int{
     return int == Int(NSDateComponentUndefined) ? int : transform(int)
 }
 
@@ -403,6 +403,9 @@ extension NSDate: Comparable {
     }
     public var components: NSDateComponents {
         return NSCalendar.currentCalendar().components(NSCalendarUnit.allValues, fromDate: self)
+    }
+    public class func fromComponents(components: NSDateComponents) -> NSDate? {
+        return NSCalendar.currentCalendar().dateFromComponents(components)
     }
 }
 

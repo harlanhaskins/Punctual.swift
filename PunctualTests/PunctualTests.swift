@@ -8,9 +8,11 @@
 
 import UIKit
 import XCTest
-import Punctual
+@testable import Punctual
 
 class PunctualTests: XCTestCase {
+    
+    let referenceDate = NSDate(timeIntervalSince1970: 0)
     
     override func setUp() {
         super.setUp()
@@ -22,22 +24,35 @@ class PunctualTests: XCTestCase {
         super.tearDown()
     }
     
+    func testApplyIfDefined() {
+        XCTAssertEqual(Punctual.applyIfDefined(1, 2, +), 3, "Numbers should be added")
+        XCTAssertEqual(Punctual.applyIfDefined(NSDateComponentUndefined, 2, +), 2, "NSDateComponentUndefined should be ignored")
+        XCTAssertEqual(Punctual.applyIfDefined(2, NSDateComponentUndefined, +), 2, "NSDateComponentUndefined should be ignored")
+        XCTAssertEqual(Punctual.applyIfDefined(NSDateComponentUndefined, NSDateComponentUndefined, +), NSDateComponentUndefined, "NSDateComponentUndefined should be ignored")
+        
+        XCTAssertEqual(Punctual.applyIfDefined(1, -), -1, "Numbers should be negated")
+        XCTAssertEqual(Punctual.applyIfDefined(NSDateComponentUndefined, -), NSDateComponentUndefined, "NSDateComponentUndefined should be ignored")
+    }
+    
+    func testWeekend() {
+        XCTAssert(!referenceDate.isWeekend, "Unix time began on a weekday.")
+    }
+    
     func testYesterday() {
-        println(1.nanosecond.ago)
-        println(10.days.until(NSDate()))
-        println((1.day + 2.months - 9.years).ago)
-        println(NSDate() - 1.day.ago!)
-        println((4.days + 9.hours + 32.minutes).timeInterval)
-        println(1.year.timeInterval)
-        println((NSDate() + 30.minutes)!.nearestHour)
-        println(4.years.fromNow?.longTimeString)
-        println(4.years.fromNow?.stringWithFormat("HH:mm"))
-        println(4.years.fromNow?.shortString)
+        print(1.nanosecond.ago)
+        print(10.days.until(NSDate()))
+        print((1.day + 2.months - 9.years).ago)
+        print(NSDate() - 1.day.ago!)
+        print((4.days + 9.hours + 32.minutes).timeInterval)
+        print(1.year.timeInterval)
+        print((NSDate() + 30.minutes)!.nearestHour)
+        print(4.years.fromNow?.longTimeString)
+        print(4.years.fromNow?.stringWithFormat("HH:mm"))
+        print(4.years.fromNow?.shortString)
     }
     
     func testDateSubtraction() {
-        let first = NSDate()
-        XCTAssertEqual(1, (first - 1.day.until(first)!).day, "Subtraction should return appropriate date.")
+        XCTAssertEqual(1, (referenceDate - 1.day.until(referenceDate)!).day, "Subtraction should return appropriate date.")
     }
     
 }
