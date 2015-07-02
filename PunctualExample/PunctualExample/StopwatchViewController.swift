@@ -22,7 +22,7 @@ class StopwatchViewController: UIViewController {
         self.intervalFormatter.allowedUnits = [.Hour, .Minute, .Second]
             let fontDescriptor = self.clockLabel.font.fontDescriptor().fontDescriptorByAddingAttributes([
                 UIFontDescriptorFeatureSettingsAttribute: [[
-                    UIFontFeatureTypeIdentifierKey: kNumberCSpacingType,
+                    UIFontFeatureTypeIdentifierKey: kNumberSpacingType,
                     UIFontFeatureSelectorIdentifierKey: kMonospacedNumbersSelector
                     ]]
                 ])
