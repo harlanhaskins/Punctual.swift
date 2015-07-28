@@ -13,7 +13,7 @@ to your `Podfile`
 # Contents
 `Punctual` extends `Int`, `NSDateComponents`, `NSDate`, and `NSCalendarUnit`, and adds features to make them work well together. It uses the robust `NSCalendar` APIs, so you can be sure it's accurate!
 
-```swift
+```rust
 println(1.day.ago)
 // Optional(2015-04-08 04:49:30 +0000)
 
