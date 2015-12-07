@@ -52,9 +52,4 @@ print(4.years.fromNow?.longTimeString)
 
 print(4.years.fromNow?.stringWithFormat("HH:mm"))
 // Optional("00:11")
-
-// get tomorrow's date
-sleep(1.day.timeInterval)
-print(NSDate())
-// please don't actually do this
 ```
