@@ -138,22 +138,22 @@ extension NSDateComponents {
     public var ago: NSDate? {
         return self.until(NSDate())
     }
-    
+
     /// - returns: the date that will occur once the receiver's components pass after now.
     public var fromNow: NSDate? {
         return self.from(NSDate())
     }
-    
+
     /// - returns: the date that will occur once the receiver's components pass after the provide date.
     public func from(date: NSDate) -> NSDate? {
         return NSCalendar.currentCalendar().dateByAddingComponents(self, toDate: date, options: [])
     }
-    
+
     /// - returns: a date that occured "the receiver's components" before the provided date.
     public func until(date: NSDate) -> NSDate? {
         return (-self).from(date)
     }
-    
+
     /// An NSTimeInterval representing the delta, in seconds, of an NSDateComponents instance.
     public var timeInterval: NSTimeInterval? {
         let templateDate = NSDate()
@@ -199,7 +199,7 @@ public prefix func -(rhs: NSDateComponents) -> NSDateComponents {
     return components
 }
 
-/// Combines two date components using the provided `transform` on all 
+/// Combines two date components using the provided `transform` on all
 /// values within the components that are not `NSDateComponentUndefined`.
 private func combine(lhs: NSDateComponents, rhs: NSDateComponents, transform: (Int, Int) -> Int) -> NSDateComponents {
     let components = NSDateComponents()
@@ -264,14 +264,14 @@ extension NSDate: Comparable {
     public var nearestHour: Int {
         return self.minutes > (Constants.minutesPerHour / 2) ? self.hour + 1 : self.hour
     }
-    
+
     public func stringWithFormat(format: String) -> String {
         Constants.formatter.dateFormat = format
         let date = Constants.formatter.stringFromDate(self)
         Constants.formatter.dateFormat = nil
         return date
     }
-    
+
     public func stringWithDateStyle(dateStyle: NSDateFormatterStyle, timeStyle: NSDateFormatterStyle) -> String {
         Constants.formatter.dateStyle = dateStyle
         Constants.formatter.timeStyle = timeStyle
@@ -280,43 +280,43 @@ extension NSDate: Comparable {
         Constants.formatter.timeStyle = .NoStyle
         return date
     }
-    
+
     public var shortString: String {
         return self.stringWithDateStyle(.ShortStyle, timeStyle: .ShortStyle)
     }
-    
+
     public var shortTimeString: String {
         return self.stringWithDateStyle(.NoStyle, timeStyle: .ShortStyle)
     }
-    
+
     public var shortDateString: String {
         return self.stringWithDateStyle(.ShortStyle, timeStyle: .NoStyle)
     }
-    
+
     public var mediumString: String {
         return self.stringWithDateStyle(.MediumStyle, timeStyle: .MediumStyle)
     }
-    
+
     public var mediumTimeString: String {
         return self.stringWithDateStyle(.NoStyle, timeStyle: .MediumStyle)
     }
-    
+
     public var mediumDateString: String {
         return self.stringWithDateStyle(.MediumStyle, timeStyle: .NoStyle)
     }
-    
+
     public var longString: String {
         return self.stringWithDateStyle(.LongStyle, timeStyle: .LongStyle)
     }
-    
+
     public var longTimeString: String {
         return self.stringWithDateStyle(.NoStyle, timeStyle: .LongStyle)
     }
-    
+
     public var longDateString: String {
         return self.stringWithDateStyle(.LongStyle, timeStyle: .NoStyle)
     }
-    
+
     public var era: Int {
         return self.components.era
     }
