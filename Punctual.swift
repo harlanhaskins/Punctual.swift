@@ -164,12 +164,9 @@ extension DateComponents {
 
 /// Applies the `transform` to the two `T` provided, defaulting either of them if it's
 /// `nil`
-internal func bimap<T>(_ a: T?, _ b: T?, default: T, _ transform: (T, T) -> T) -> T {
-    switch (a, b) {
-    case (.some(let a), nil): return transform(a, `default`)
-    case (nil, .some(let b)): return transform(`default`, b)
-    default: return transform(a!, b!)
-    }
+internal func bimap<T>(_ a: T?, _ b: T?, default: T, _ transform: (T, T) -> T) -> T? {
+    if a == nil && b == nil { return nil }
+    return transform(a ?? `default`, b ?? `default`)
 }
 
 /// - returns: a new `NSDateComponents` that represents the negative of all values within the
