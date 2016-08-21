@@ -146,7 +146,7 @@ extension DateComponents {
 
     /// - returns: the date that will occur once the receiver's components pass after the provide date.
     public func from(_ date: Date) -> Date? {
-        return Calendar.current.date(byAdding: self, to: date)
+        return Calendar.autoupdatingCurrent.date(byAdding: self, to: date)
     }
 
     /// - returns: a date that occured "the receiver's components" before the provided date.
@@ -232,19 +232,19 @@ extension Date {
     }
     @available(iOS, introduced: 8.0)
     public var isToday: Bool {
-        return Calendar.current.isDateInToday(self)
+        return Calendar.autoupdatingCurrent.isDateInToday(self)
     }
     @available(iOS, introduced: 8.0)
     public var isYesterday: Bool {
-        return Calendar.current.isDateInYesterday(self)
+        return Calendar.autoupdatingCurrent.isDateInYesterday(self)
     }
     @available(iOS, introduced: 8.0)
     public var isTomorrow: Bool {
-        return Calendar.current.isDateInTomorrow(self)
+        return Calendar.autoupdatingCurrent.isDateInTomorrow(self)
     }
     @available(iOS, introduced: 8.0)
     public var isWeekend: Bool {
-        return Calendar.current.isDateInWeekend(self)
+        return Calendar.autoupdatingCurrent.isDateInWeekend(self)
     }
     public var isInPast: Bool {
         return self < Date()
@@ -402,10 +402,10 @@ extension Date {
         return self.yearForWeekOfYear
     }
     public var components: DateComponents {
-        return Calendar.current.dateComponents(Calendar.Component.allValues, from: self)
+        return Calendar.autoupdatingCurrent.dateComponents(Calendar.Component.allValues, from: self)
     }
     public static func fromComponents(_ components: DateComponents) -> Date? {
-        return Calendar.current.date(from: components)
+        return Calendar.autoupdatingCurrent.date(from: components)
     }
 }
 
@@ -424,7 +424,7 @@ extension Calendar.Component {
 ///     let difference = lhs - rhs
 ///     rhs + difference = lhs
 public func -(lhs: Date, rhs: Date) -> DateComponents {
-    return Calendar.current.dateComponents(Calendar.Component.allValues, from: rhs, to: lhs)
+    return Calendar.autoupdatingCurrent.dateComponents(Calendar.Component.allValues, from: rhs, to: lhs)
 }
 
 /// Adds date components to a date and returns a new date.
