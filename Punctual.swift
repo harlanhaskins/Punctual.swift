@@ -11,438 +11,436 @@ import Foundation
 /// MARK: Int extensions
 
 extension Int {
-    public var era: NSDateComponents {
-        let components = NSDateComponents()
+    public var era: DateComponents {
+        var components = DateComponents()
         components.era = self
         return components
     }
-    public var eras: NSDateComponents {
+    public var eras: DateComponents {
         return self.era
     }
-    public var year: NSDateComponents {
-        let components = NSDateComponents()
+    public var year: DateComponents {
+        var components = DateComponents()
         components.year = self
         return components
     }
-    public var years: NSDateComponents {
+    public var years: DateComponents {
         return self.year
     }
-    public var month: NSDateComponents {
-        let components = NSDateComponents()
+    public var month: DateComponents {
+        var components = DateComponents()
         components.month = self
         return components
     }
-    public var months: NSDateComponents {
+    public var months: DateComponents {
         return self.month
     }
-    public var day: NSDateComponents {
-        let components = NSDateComponents()
+    public var day: DateComponents {
+        var components = DateComponents()
         components.day = self
         return components
     }
-    public var days: NSDateComponents {
+    public var days: DateComponents {
         return self.day
     }
-    public var hour: NSDateComponents {
-        let components = NSDateComponents()
+    public var hour: DateComponents {
+        var components = DateComponents()
         components.hour = self
         return components
     }
-    public var hours: NSDateComponents {
+    public var hours: DateComponents {
         return self.hour
     }
-    public var minute: NSDateComponents {
-        let components = NSDateComponents()
+    public var minute: DateComponents {
+        var components = DateComponents()
         components.minute = self
         return components
     }
-    public var minutes: NSDateComponents {
+    public var minutes: DateComponents {
         return self.minute
     }
-    public var second: NSDateComponents {
-        let components = NSDateComponents()
+    public var second: DateComponents {
+        var components = DateComponents()
         components.second = self
         return components
     }
-    public var seconds: NSDateComponents {
+    public var seconds: DateComponents {
         return self.second
     }
-    public var nanosecond: NSDateComponents {
-        let components = NSDateComponents()
+    public var nanosecond: DateComponents {
+        var components = DateComponents()
         components.nanosecond = self
         return components
     }
-    public var nanoseconds: NSDateComponents {
+    public var nanoseconds: DateComponents {
         return self.nanosecond
     }
-    public var millisecond: NSDateComponents {
+    public var millisecond: DateComponents {
         return (1000000 * self).nanoseconds
     }
-    public var milliseconds: NSDateComponents {
+    public var milliseconds: DateComponents {
         return self.millisecond
     }
-    public var weekday: NSDateComponents {
-        let components = NSDateComponents()
+    public var weekday: DateComponents {
+        var components = DateComponents()
         components.weekday = self
         return components
     }
-    public var weekdays: NSDateComponents {
+    public var weekdays: DateComponents {
         return self.weekday
     }
-    public var weekdayOrdinal: NSDateComponents {
-        let components = NSDateComponents()
+    public var weekdayOrdinal: DateComponents {
+        var components = DateComponents()
         components.weekdayOrdinal = self
         return components
     }
-    public var weekdayOrdinals: NSDateComponents {
+    public var weekdayOrdinals: DateComponents {
         return self.weekdayOrdinal
     }
-    public var quarter: NSDateComponents {
-        let components = NSDateComponents()
+    public var quarter: DateComponents {
+        var components = DateComponents()
         components.quarter = self
         return components
     }
-    public var quarters: NSDateComponents {
+    public var quarters: DateComponents {
         return self.quarter
     }
-    public var weekOfMonth: NSDateComponents {
-        let components = NSDateComponents()
+    public var weekOfMonth: DateComponents {
+        var components = DateComponents()
         components.weekOfMonth = self
         return components
     }
-    public var weeksOfMonth: NSDateComponents {
+    public var weeksOfMonth: DateComponents {
         return self.weekOfMonth
     }
-    public var weekOfYear: NSDateComponents {
-        let components = NSDateComponents()
+    public var weekOfYear: DateComponents {
+        var components = DateComponents()
         components.weekOfYear = self
         return components
     }
-    public var weeksOfYear: NSDateComponents {
+    public var weeksOfYear: DateComponents {
         return self.weekOfYear
     }
-    public var yearForWeekOfYear: NSDateComponents {
-        let components = NSDateComponents()
+    public var yearForWeekOfYear: DateComponents {
+        var components = DateComponents()
         components.yearForWeekOfYear = self
         return components
     }
-    public var yearsForWeekOfYear: NSDateComponents {
+    public var yearsForWeekOfYear: DateComponents {
         return self.yearForWeekOfYear
     }
 }
 
 /// MARK: NSDateComponents extensions
 
-extension NSDateComponents {
+extension DateComponents {
     /// - returns: a date that occured "the receiver's components" before now.
-    public var ago: NSDate? {
-        return self.until(NSDate())
+    public var ago: Date? {
+        return self.until(Date())
     }
 
     /// - returns: the date that will occur once the receiver's components pass after now.
-    public var fromNow: NSDate? {
-        return self.from(NSDate())
+    public var fromNow: Date? {
+        return self.from(Date())
     }
 
     /// - returns: the date that will occur once the receiver's components pass after the provide date.
-    public func from(date: NSDate) -> NSDate? {
-        return NSCalendar.currentCalendar().dateByAddingComponents(self, toDate: date, options: [])
+    public func from(_ date: Date) -> Date? {
+        return Calendar.current.date(byAdding: self, to: date)
     }
 
     /// - returns: a date that occured "the receiver's components" before the provided date.
-    public func until(date: NSDate) -> NSDate? {
+    public func until(_ date: Date) -> Date? {
         return (-self).from(date)
     }
 
     /// An NSTimeInterval representing the delta, in seconds, of an NSDateComponents instance.
-    public var timeInterval: NSTimeInterval? {
-        let templateDate = NSDate()
+    public var timeInterval: TimeInterval? {
+        let templateDate = Date()
         let finalDate = templateDate + self
-        return finalDate?.timeIntervalSinceDate(templateDate)
+        return finalDate?.timeIntervalSince(templateDate)
     }
 }
 
-/// Applies the `transform` to the two `Ints` provided, unless either of them is
-/// `NSDateComponentUndefined`
-internal func applyIfDefined(int: Int, _ otherInt: Int,  _ transform: (Int, Int) -> Int) -> Int{
-    switch (int, otherInt) {
-    case (_, Int(NSDateComponentUndefined)): return transform(0, int)
-    case (Int(NSDateComponentUndefined), _): return transform(0, otherInt)
-    default: return transform(int, otherInt)
+/// Applies the `transform` to the two `T` provided, defaulting either of them if it's
+/// `nil`
+internal func bimap<T>(_ a: T?, _ b: T?, default: T, _ transform: (T, T) -> T) -> T {
+    switch (a, b) {
+    case (.some(let a), nil): return transform(a, `default`)
+    case (nil, .some(let b)): return transform(`default`, b)
+    default: return transform(a!, b!)
     }
-}
-
-/// Applies the `transform` to the `int`
-/// iff `int != NSDateComponentUndefined`
-internal func applyIfDefined(int: Int, _ transform: Int -> Int) -> Int{
-    return int == Int(NSDateComponentUndefined) ? int : transform(int)
 }
 
 /// - returns: a new `NSDateComponents` that represents the negative of all values within the
 /// components that are not `NSDateComponentUndefined`.
-public prefix func -(rhs: NSDateComponents) -> NSDateComponents {
-    let components = NSDateComponents()
-    components.era = applyIfDefined(rhs.era, -)
-    components.year = applyIfDefined(rhs.year, -)
-    components.month = applyIfDefined(rhs.month, -)
-    components.day = applyIfDefined(rhs.day, -)
-    components.hour = applyIfDefined(rhs.hour, -)
-    components.minute = applyIfDefined(rhs.minute, -)
-    components.second = applyIfDefined(rhs.second, -)
-    components.nanosecond = applyIfDefined(rhs.nanosecond, -)
-    components.weekday = applyIfDefined(rhs.weekday, -)
-    components.weekdayOrdinal = applyIfDefined(rhs.weekdayOrdinal, -)
-    components.quarter = applyIfDefined(rhs.quarter, -)
-    components.weekOfMonth = applyIfDefined(rhs.weekOfMonth, -)
-    components.weekOfYear = applyIfDefined(rhs.weekOfYear, -)
-    components.yearForWeekOfYear = applyIfDefined(rhs.yearForWeekOfYear, -)
+public prefix func -(rhs: DateComponents) -> DateComponents {
+    var components = DateComponents()
+    components.era = rhs.era.map(-)
+    components.year = rhs.year.map(-)
+    components.month = rhs.month.map(-)
+    components.day = rhs.day.map(-)
+    components.hour = rhs.hour.map(-)
+    components.minute = rhs.minute.map(-)
+    components.second = rhs.second.map(-)
+    components.nanosecond = rhs.nanosecond.map(-)
+    components.weekday = rhs.weekday.map(-)
+    components.weekdayOrdinal = rhs.weekdayOrdinal.map(-)
+    components.quarter = rhs.quarter.map(-)
+    components.weekOfMonth = rhs.weekOfMonth.map(-)
+    components.weekOfYear = rhs.weekOfYear.map(-)
+    components.yearForWeekOfYear = rhs.yearForWeekOfYear.map(-)
     return components
 }
 
 /// Combines two date components using the provided `transform` on all
 /// values within the components that are not `NSDateComponentUndefined`.
-private func combine(lhs: NSDateComponents, rhs: NSDateComponents, transform: (Int, Int) -> Int) -> NSDateComponents {
-    let components = NSDateComponents()
-    components.era = applyIfDefined(lhs.era, rhs.era, transform)
-    components.year = applyIfDefined(lhs.year, rhs.year, transform)
-    components.month = applyIfDefined(lhs.month, rhs.month, transform)
-    components.day = applyIfDefined(lhs.day, rhs.day, transform)
-    components.hour = applyIfDefined(lhs.hour, rhs.hour, transform)
-    components.minute = applyIfDefined(lhs.minute, rhs.minute, transform)
-    components.second = applyIfDefined(lhs.second, rhs.second, transform)
-    components.nanosecond = applyIfDefined(lhs.nanosecond, rhs.nanosecond, transform)
-    components.weekday = applyIfDefined(lhs.weekday, rhs.weekday, transform)
-    components.weekdayOrdinal = applyIfDefined(lhs.weekdayOrdinal, rhs.weekdayOrdinal, transform)
-    components.quarter = applyIfDefined(lhs.quarter, rhs.quarter, transform)
-    components.weekOfMonth = applyIfDefined(lhs.weekOfMonth, rhs.weekOfMonth, transform)
-    components.weekOfYear = applyIfDefined(lhs.weekOfYear, rhs.weekOfYear, transform)
-    components.yearForWeekOfYear = applyIfDefined(lhs.yearForWeekOfYear, rhs.yearForWeekOfYear, transform)
+private func combine(_ lhs: DateComponents, rhs: DateComponents, transform: (Int, Int) -> Int) -> DateComponents {
+    var components = DateComponents()
+    components.era = bimap(lhs.era, rhs.era, default: 0, transform)
+    components.year = bimap(lhs.year, rhs.year, default: 0, transform)
+    components.month = bimap(lhs.month, rhs.month, default: 0, transform)
+    components.day = bimap(lhs.day, rhs.day, default: 0, transform)
+    components.hour = bimap(lhs.hour, rhs.hour, default: 0, transform)
+    components.minute = bimap(lhs.minute, rhs.minute, default: 0, transform)
+    components.second = bimap(lhs.second, rhs.second, default: 0, transform)
+    components.nanosecond = bimap(lhs.nanosecond, rhs.nanosecond, default: 0, transform)
+    components.weekday = bimap(lhs.weekday, rhs.weekday, default: 0, transform)
+    components.weekdayOrdinal = bimap(lhs.weekdayOrdinal, rhs.weekdayOrdinal, default: 0, transform)
+    components.quarter = bimap(lhs.quarter, rhs.quarter, default: 0, transform)
+    components.weekOfMonth = bimap(lhs.weekOfMonth, rhs.weekOfMonth, default: 0, transform)
+    components.weekOfYear = bimap(lhs.weekOfYear, rhs.weekOfYear, default: 0, transform)
+    components.yearForWeekOfYear = bimap(lhs.yearForWeekOfYear, rhs.yearForWeekOfYear, default: 0, transform)
     return components
 }
 
 /// Adds two NSDateComponents and returns their combined individual components.
-public func +(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents {
+public func +(lhs: DateComponents, rhs: DateComponents) -> DateComponents {
     return combine(lhs, rhs: rhs, transform: +)
 }
 
 /// Subtracts two NSDateComponents and returns the relative difference between them.
-public func -(lhs: NSDateComponents, rhs: NSDateComponents) -> NSDateComponents {
+public func -(lhs: DateComponents, rhs: DateComponents) -> DateComponents {
     return lhs + (-rhs)
 }
 
 /// MARK: NSDate extensions
 
-extension NSDate: Comparable {
-    private struct Constants {
-        // Create one instance of NSDateFormatter because
-        // NSFormatters are expensive to allocate.
-        static let formatter = NSDateFormatter()
+extension Date {
+    fileprivate struct Constants {
+        // Create one instance of DateFormatter because
+        // Formatters are expensive to allocate.
+        static let formatter = DateFormatter()
         static let minutesPerHour = 60
     }
-    @available(iOS, introduced=8.0)
+    @available(iOS, introduced: 8.0)
     public var isToday: Bool {
-        return NSCalendar.currentCalendar().isDateInToday(self)
+        return Calendar.current.isDateInToday(self)
     }
-    @available(iOS, introduced=8.0)
+    @available(iOS, introduced: 8.0)
     public var isYesterday: Bool {
-        return NSCalendar.currentCalendar().isDateInYesterday(self)
+        return Calendar.current.isDateInYesterday(self)
     }
-    @available(iOS, introduced=8.0)
+    @available(iOS, introduced: 8.0)
     public var isTomorrow: Bool {
-        return NSCalendar.currentCalendar().isDateInTomorrow(self)
+        return Calendar.current.isDateInTomorrow(self)
     }
-    @available(iOS, introduced=8.0)
+    @available(iOS, introduced: 8.0)
     public var isWeekend: Bool {
-        return NSCalendar.currentCalendar().isDateInWeekend(self)
+        return Calendar.current.isDateInWeekend(self)
     }
     public var isInPast: Bool {
-        return self < NSDate()
+        return self < Date()
     }
     public var isInFuture: Bool {
-        return self > NSDate()
+        return self > Date()
     }
     public var nearestHour: Int {
         return self.minutes > (Constants.minutesPerHour / 2) ? self.hour + 1 : self.hour
     }
-
-    public func stringWithFormat(format: String) -> String {
+    
+    @available(*, unavailable, renamed: "string(format:)")
+    public func stringWithFormat(_ format: String) -> String {
+        return string(format: format)
+    }
+    public func string(format: String) -> String {
         Constants.formatter.dateFormat = format
-        let date = Constants.formatter.stringFromDate(self)
+        let date = Constants.formatter.string(from: self)
         Constants.formatter.dateFormat = nil
         return date
     }
+  
+    @available(*, unavailable, renamed: "string(dateStyle:timeStyle:)")
+    public func stringWithDateStyle(_ dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style) -> String {
+      return string(dateStyle: dateStyle, timeStyle: timeStyle)
+    }
 
-    public func stringWithDateStyle(dateStyle: NSDateFormatterStyle, timeStyle: NSDateFormatterStyle) -> String {
+    public func string(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style) -> String {
         Constants.formatter.dateStyle = dateStyle
         Constants.formatter.timeStyle = timeStyle
-        let date = Constants.formatter.stringFromDate(self)
-        Constants.formatter.dateStyle = .NoStyle
-        Constants.formatter.timeStyle = .NoStyle
+        let date = Constants.formatter.string(from: self)
+        Constants.formatter.dateStyle = .none
+        Constants.formatter.timeStyle = .none
         return date
     }
 
     public var shortString: String {
-        return self.stringWithDateStyle(.ShortStyle, timeStyle: .ShortStyle)
+        return self.string(dateStyle: .short, timeStyle: .short)
     }
 
     public var shortTimeString: String {
-        return self.stringWithDateStyle(.NoStyle, timeStyle: .ShortStyle)
+        return self.string(dateStyle: .none, timeStyle: .short)
     }
 
     public var shortDateString: String {
-        return self.stringWithDateStyle(.ShortStyle, timeStyle: .NoStyle)
+        return self.string(dateStyle: .short, timeStyle: .none)
     }
 
     public var mediumString: String {
-        return self.stringWithDateStyle(.MediumStyle, timeStyle: .MediumStyle)
+        return self.string(dateStyle: .medium, timeStyle: .medium)
     }
 
     public var mediumTimeString: String {
-        return self.stringWithDateStyle(.NoStyle, timeStyle: .MediumStyle)
+        return self.string(dateStyle: .none, timeStyle: .medium)
     }
 
     public var mediumDateString: String {
-        return self.stringWithDateStyle(.MediumStyle, timeStyle: .NoStyle)
+        return self.string(dateStyle: .medium, timeStyle: .none)
     }
 
     public var longString: String {
-        return self.stringWithDateStyle(.LongStyle, timeStyle: .LongStyle)
+        return self.string(dateStyle: .long, timeStyle: .long)
     }
 
     public var longTimeString: String {
-        return self.stringWithDateStyle(.NoStyle, timeStyle: .LongStyle)
+        return self.string(dateStyle: .none, timeStyle: .long)
     }
 
     public var longDateString: String {
-        return self.stringWithDateStyle(.LongStyle, timeStyle: .NoStyle)
+        return self.string(dateStyle: .long, timeStyle: .none)
     }
 
     public var era: Int {
-        return self.components.era
+        return self.components.era!
     }
     public var eras: Int {
         return self.era
     }
     public var year: Int {
-        return self.components.year
+        return self.components.year!
     }
     public var years: Int {
         return self.year
     }
     public var month: Int {
-        return self.components.month
+        return self.components.month!
     }
     public var months: Int {
         return self.month
     }
     public var day: Int {
-        return self.components.day
+        return self.components.day!
     }
     public var days: Int {
         return self.day
     }
     public var hour: Int {
-        return self.components.hour
+        return self.components.hour!
     }
     public var hours: Int {
         return self.hour
     }
     public var minute: Int {
-        return self.components.minute
+        return self.components.minute!
     }
     public var minutes: Int {
         return self.minute
     }
     public var second: Int {
-        return self.components.second
+        return self.components.second!
     }
     public var seconds: Int {
         return self.second
     }
     public var nanosecond: Int {
-        return self.components.nanosecond
+        return self.components.nanosecond!
     }
     public var nanoseconds: Int {
         return self.nanosecond
     }
     public var weekday: Int {
-        return self.components.weekday
+        return self.components.weekday!
     }
     public var weekdays: Int {
         return self.weekday
     }
     public var weekdayOrdinal: Int {
-        return self.components.weekdayOrdinal
+        return self.components.weekdayOrdinal!
     }
     public var weekdayOrdinals: Int {
         return self.weekdayOrdinal
     }
     public var quarter: Int {
-        return self.components.quarter
+        return self.components.quarter!
     }
     public var quarters: Int {
         return self.quarter
     }
     public var weekOfMonth: Int {
-        return self.components.weekOfMonth
+        return self.components.weekOfMonth!
     }
     public var weekOfMonths: Int {
         return self.weekOfMonth
     }
     public var weekOfYear: Int {
-        return self.components.weekOfYear
+        return self.components.weekOfYear!
     }
     public var weekOfYears: Int {
         return self.weekOfYear
     }
     public var yearForWeekOfYear: Int {
-        return self.components.yearForWeekOfYear
+        return self.components.yearForWeekOfYear!
     }
     public var yearForWeekOfYears: Int {
         return self.yearForWeekOfYear
     }
-    public var components: NSDateComponents {
-        return NSCalendar.currentCalendar().components(NSCalendarUnit.allValues, fromDate: self)
+    public var components: DateComponents {
+        return Calendar.current.dateComponents(Calendar.Component.allValues, from: self)
     }
-    public class func fromComponents(components: NSDateComponents) -> NSDate? {
-        return NSCalendar.currentCalendar().dateFromComponents(components)
-    }
-}
-
-extension NSCalendarUnit {
-    /// Shortcut for 'all calendar units'.
-    static var allValues: NSCalendarUnit {
-        return [.Era, .Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday, .WeekdayOrdinal, .Quarter, .WeekOfMonth, .WeekOfYear, .YearForWeekOfYear, .Nanosecond, .Calendar, .TimeZone]
+    public static func fromComponents(_ components: DateComponents) -> Date? {
+        return Calendar.current.date(from: components)
     }
 }
 
-public func <(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.compare(rhs) == .OrderedAscending
-}
-
-public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.isEqualToDate(rhs)
+extension Calendar.Component {
+    /// Shortcut for 'all calendar components'.
+    static var allValues: Set<Calendar.Component> {
+        return [.era, .year, .month, .day, .hour, .minute,
+                .second, .weekday, .weekdayOrdinal, .quarter,
+                .weekOfMonth, .weekOfYear, .yearForWeekOfYear,
+                .nanosecond, .calendar, .timeZone]
+    }
 }
 
 /// Subtracts two dates and returns the relative components from `lhs` to `rhs`.
 /// Follows this mathematical pattern:
 ///     let difference = lhs - rhs
 ///     rhs + difference = lhs
-public func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents {
-    return NSCalendar.currentCalendar().components(NSCalendarUnit.allValues, fromDate: rhs, toDate: lhs, options: .MatchStrictly)
+public func -(lhs: Date, rhs: Date) -> DateComponents {
+    return Calendar.current.dateComponents(Calendar.Component.allValues, from: rhs, to: lhs)
 }
 
 /// Adds date components to a date and returns a new date.
-public func +(lhs: NSDate, rhs: NSDateComponents) -> NSDate? {
+public func +(lhs: Date, rhs: DateComponents) -> Date? {
     return rhs.from(lhs)
 }
 
 /// Adds date components to a date and returns a new date.
-public func +(lhs: NSDateComponents, rhs: NSDate) -> NSDate? {
+public func +(lhs: DateComponents, rhs: Date) -> Date? {
     return rhs + lhs
 }
 
 /// Subtracts date components from a date and returns a new date.
-public func -(lhs: NSDate, rhs: NSDateComponents) -> NSDate? {
+public func -(lhs: Date, rhs: DateComponents) -> Date? {
     return lhs + (-rhs)
 }
