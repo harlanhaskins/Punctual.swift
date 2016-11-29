@@ -8,7 +8,7 @@ Punctual is available through the [Swift Package Manager](https://github.com/app
 Just add this as a dependency in your `Package.swift`:
 
 ```
-.Package(url: "https://github.com/harlanhaskins/Punctual.git", majorVersion: 1)
+.Package(url: "https://github.com/harlanhaskins/Punctual.swift.git", majorVersion: 1)
 ```
 
 
